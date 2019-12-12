@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { getMovies } from "../services/fakeMovieService";
 /*import { deleteMovie } from "../services/fakeMovieService";*/
 import { getGenres } from "../services/fakeGenreService";
@@ -76,6 +77,8 @@ class Movies extends Component {
           />
         </div>
         <div className="col-8">
+          <Link to="/movies/new" className="btn btn-primary mb-2">New Movie</Link>
+          {/*<button className="btn btn-primary mb-2" onClick={() => this.props.history.push('/movies/new')}> New Movie</button>*/}
           <p>Showing {totalCount} movies in the database</p>
           <MoviesTable
             movies={movies}
@@ -91,7 +94,7 @@ class Movies extends Component {
             onPageChange={this.hadlePageChange}
           />
         </div>
-      </div>
+      </div >
     );
   }
 }
