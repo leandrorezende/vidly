@@ -8,6 +8,7 @@ import Rentals from "./components/rentals";
 import NotFound from "./components/notFound";
 import NavBar from "./components/navBar";
 import LoginForm from "./components/loginForm";
+import ProtectedRoute from "./components/common/protectedRoute";
 import Logout from "./components/logout";
 import RegisterForm from "./components/registerForm";
 import auth from "./services/authService";
@@ -23,17 +24,18 @@ class App extends Component {
   }
 
   render() {
+    const { user } = this.state;
     return (
       <React.Fragment>
         <ToastContainer />
-        <NavBar user={this.state.user} />
+        <NavBar user={user} />
         <main className="container">
           <Switch>
             <Route path="/register" component={RegisterForm}></Route>
             <Route path="/login" component={LoginForm}></Route>
             <Route path="/logout" component={Logout}></Route>
-            <Route path="/movies/:id" component={MoviesForm}></Route>
-            <Route path="/movies" component={Movies}></Route>
+            <ProtectedRoute path="/movies/:id" component={MoviesForm}></ProtectedRoute>
+            <Route path="/movies" render={props => <Movies {...props} user={this.state.user} />}></Route>
             <Route path="/customers" component={Customers}></Route>
             <Route path="/rentals" component={Rentals}></Route>
             <Route path="/not-found" component={NotFound}></Route>
